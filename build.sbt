@@ -10,6 +10,7 @@ mainClass in (Compile, run) := Some("hello.SampleController")
 
 libraryDependencies ++= Seq(
   "org.springframework.boot" % "spring-boot-starter-web" % "2.0.0.RELEASE",
-  "com.typesafe.akka" %% "akka-actor" % akkaVersion
+  "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+  "javax.inject" % "javax.inject" % "1"
 )
 
