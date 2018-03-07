@@ -3,6 +3,8 @@ package simple;
 /**
  * Created by Kirill on 06.03.2018.
  */
+import Actors.MessageActor;
+import Protocols.MessageActorProtocol;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import org.springframework.boot.*;
@@ -29,6 +31,7 @@ public class SampleController {
             AnnotationConfigApplicationContext ctx =
                     new AnnotationConfigApplicationContext();
             ctx.register(AppConfiguration.class);
+            ctx.register(MessageActor.class);
             ctx.scan("simple");
             ctx.refresh();
 
@@ -37,6 +40,13 @@ public class SampleController {
             ActorRef counter = system.actorOf(
                 SpringExtProvider.get(system).props("CountingActor"), "counter");
 
+            ActorRef message = system.actorOf(
+                    SpringExtProvider.get(system).props("MessageActor"), "message");
+
             counter.tell(new CountingActor.Count(), null);
+            message.tell(new MessageActorProtocol.Say("New message for test") , null);
+            message.tell("New message for test String" , null);
+//            counter.tell(new CountingActor.Count(), null);
+//            counter.tell(new CountingActor.Count(), null);
     }
 }

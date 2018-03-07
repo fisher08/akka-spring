@@ -23,7 +23,7 @@ class AppConfiguration {
    */
   @Bean
   public ActorSystem actorSystem() {
-    ActorSystem system = ActorSystem.create("AkkaJavaSpring");
+    ActorSystem system = ActorSystem.create("ClusterSystem");
     // initialize the application context in the Akka Spring Extension
     SpringExtProvider.get(system).initialize(applicationContext);
 //    CountExtension.CountExtensionProvider.get(system).increment();
